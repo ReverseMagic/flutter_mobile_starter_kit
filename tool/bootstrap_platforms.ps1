@@ -50,7 +50,7 @@ try {
         }
     }
 
-    fvm flutter create --platforms=android,ios --org com.example --project-name mobile_starter --no-pub .
+    fvm flutter create --overwrite --platforms=android,ios --org com.example --project-name mobile_starter --no-pub .
 
     foreach ($relativePath in $preservePaths) {
         $backupPath = Join-Path $backupRoot $relativePath
