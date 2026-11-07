@@ -1,0 +1,18 @@
+{
+  "@@locale": "ar",
+  "appTitle": "قالب تطبيق",
+  "welcomeTitle": "بداية بسيطة وواضحة",
+  "welcomeBody": "أساس Flutter صغير وقابل لإعادة الاستخدام لتطبيقات Android وiOS.",
+  "appearance": "المظهر",
+  "appearanceDescription": "اختر شكل التطبيق.",
+  "system": "النظام",
+  "light": "فاتح",
+  "dark": "داكن",
+  "language": "اللغة",
+  "languageDescription": "اختر لغة أو اتبع إعدادات جهازك.",
+  "english": "الإنجليزية",
+  "arabic": "العربية",
+  "foundationTitle": "الأساس",
+  "foundationBody": "هذه الشاشة مثال توضيحي. استبدلها بأول ميزة حقيقية في تطبيقك.",
+  "temporarySettingsNotice": "اختيارات المظهر واللغة مؤقتة في هذا المثال، وستُعاد عند إعادة تشغيل التطبيق."
+}
