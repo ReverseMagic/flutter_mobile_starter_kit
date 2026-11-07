@@ -5,3 +5,5 @@ output-class: AppLocalizations
 synthetic-package: false
 output-dir: lib/l10n/generated
 nullable-getter: false
+preferred-supported-locales:
+  - en
