@@ -1,0 +1,63 @@
+{
+  "@@locale": "en",
+  "appTitle": "Mobile Starter",
+  "@appTitle": {
+    "description": "Generic application title for the starter example."
+  },
+  "welcomeTitle": "A clean starting point",
+  "@welcomeTitle": {
+    "description": "Main heading on the starter example home screen."
+  },
+  "welcomeBody": "A small, reusable Flutter foundation for Android and iOS.",
+  "@welcomeBody": {
+    "description": "Introductory description of the starter kit."
+  },
+  "appearance": "Appearance",
+  "@appearance": {
+    "description": "Section heading for theme selection."
+  },
+  "appearanceDescription": "Choose how the app looks.",
+  "@appearanceDescription": {
+    "description": "Helper text for theme selection."
+  },
+  "system": "System",
+  "@system": {
+    "description": "Follow the operating system preference."
+  },
+  "light": "Light",
+  "@light": {
+    "description": "Light theme option."
+  },
+  "dark": "Dark",
+  "@dark": {
+    "description": "Dark theme option."
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Section heading for language selection."
+  },
+  "languageDescription": "Choose a language or follow your device.",
+  "@languageDescription": {
+    "description": "Helper text for language selection."
+  },
+  "english": "English",
+  "@english": {
+    "description": "English language option."
+  },
+  "arabic": "Arabic",
+  "@arabic": {
+    "description": "Arabic language option."
+  },
+  "foundationTitle": "Foundation",
+  "@foundationTitle": {
+    "description": "Heading for the example information card."
+  },
+  "foundationBody": "This screen is an example. Replace it with your product's first real feature.",
+  "@foundationBody": {
+    "description": "Explains that the starter home screen is an example."
+  },
+  "temporarySettingsNotice": "Theme and language selections are temporary in this example and reset when the app restarts.",
+  "@temporarySettingsNotice": {
+    "description": "Discloses that preference persistence has not been implemented."
+  }
+}
