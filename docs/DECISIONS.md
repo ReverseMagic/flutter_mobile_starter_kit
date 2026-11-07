@@ -11,8 +11,8 @@ This file is the decision log. Only decisions explicitly marked `ACCEPTED` are b
 ## D-002 — Flutter and Dart baseline
 
 - Status: ACCEPTED
-- Decision: Use Flutter stable 3.47.9 with its bundled Dart 3.13.7 baseline for the initial project foundation.
-- Evidence: Flutter's official SDK changelog lists the 3.47.9 stable hotfix; Dart's official changelog confirms the 3.13 release line. The exact bundled Dart version must be confirmed by the pinned SDK itself before package resolution and runtime verification.
+- Decision: Use Flutter stable 3.47.9 with its bundled Dart 3.13 release line for the initial project foundation.
+- Evidence: Flutter's official SDK changelog lists the 3.47.9 stable hotfix; Dart's official changelog confirms the 3.13 release line. The exact bundled Dart patch version must be confirmed by the pinned SDK itself before package resolution and runtime verification.
 - Constraint: Do not install a separate Dart SDK; Flutter ships the Dart SDK used by the project. Re-evaluate only when an approved upgrade is planned.
 
 ## D-003 — Architecture style
