@@ -1,0 +1,113 @@
+name: Generate Android and iOS projects
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/bootstrap-platforms.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: generate-mobile-platforms
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    name: Generate native platform scaffolding
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up pinned Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.9
+          channel: stable
+          cache: true
+
+      - name: Confirm toolchain
+        run: |
+          flutter --version
+          dart --version
+
+      - name: Generate Android and iOS folders without replacing app source
+        shell: bash
+        run: |
+          set -euo pipefail
+          backup_dir="$(mktemp -d)"
+          preserve_paths=(
+            AGENTS.md
+            README.md
+            .gitignore
+            .fvmrc
+            analysis_options.yaml
+            docs
+            l10n.yaml
+            lib
+            pubspec.yaml
+            pubspec.lock
+            test
+            tool
+            .github
+          )
+
+          cleanup() {
+            rm -rf "$backup_dir"
+          }
+          trap cleanup EXIT
+
+          for path in "${preserve_paths[@]}"; do
+            if [[ -e "$path" ]]; then
+              mkdir -p "$backup_dir/$(dirname "$path")"
+              cp -a "$path" "$backup_dir/$path"
+            fi
+          done
+
+          flutter create --overwrite --platforms=android,ios --org com.example --project-name mobile_starter --no-pub .
+
+          for path in "${preserve_paths[@]}"; do
+            if [[ -e "$backup_dir/$path" ]]; then
+              rm -rf "$path"
+              mkdir -p "$(dirname "$path")"
+              cp -a "$backup_dir/$path" "$path"
+            fi
+          done
+
+          rm -f .github/workflows/bootstrap-platforms.yml
+
+      - name: Resolve dependencies
+        run: flutter pub get
+
+      - name: Generate localization source
+        run: flutter gen-l10n
+
+      - name: Format Dart sources
+        run: dart format lib/app lib/core lib/features lib/main.dart test
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Test
+        run: flutter test
+
+      - name: Build Android debug APK
+        run: flutter build apk --debug
+
+      - name: Commit generated platform projects
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No platform scaffolding changes were generated."
+          else
+            git commit -m "build: generate Android and iOS platform projects"
+            git push
+          fi
