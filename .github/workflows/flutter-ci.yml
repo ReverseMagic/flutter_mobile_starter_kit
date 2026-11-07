@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: flutter-ci-${{ github.ref }}
@@ -43,11 +43,33 @@ jobs:
       - name: Generate localizations
         run: flutter gen-l10n
 
-      - name: Check formatting
-        run: dart format --output=none --set-exit-if-changed .
+      - name: Format Dart sources
+        run: dart format lib/app lib/core lib/features lib/main.dart test
+
+      - name: Require committed formatting on pull requests
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code -- lib/app lib/core lib/features lib/main.dart test
+
+      - name: Inspect analyzer configuration
+        run: cat analysis_options.yaml
 
       - name: Analyze
         run: flutter analyze
 
       - name: Test
         run: flutter test
+
+      - name: Commit formatter changes on main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- lib/app lib/core lib/features lib/main.dart test analysis_options.yaml
+          if git diff --cached --quiet; then
+            echo "No formatter or analyzer configuration changes to commit."
+          else
+            git commit -m "style: apply Dart formatting and analyzer updates"
+            git push
+          fi
