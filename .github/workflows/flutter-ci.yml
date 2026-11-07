@@ -10,22 +10,22 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: flutter-ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  validate:
-    name: Format, analyze, and test
+  validate-android:
+    name: Format, analyze, test, and build Android
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Flutter
+      - name: Set up pinned Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.47.9
@@ -43,33 +43,44 @@ jobs:
       - name: Generate localizations
         run: flutter gen-l10n
 
-      - name: Format Dart sources
-        run: dart format lib/app lib/core lib/features lib/main.dart test
-
-      - name: Require committed formatting on pull requests
-        if: github.event_name == 'pull_request'
-        run: git diff --exit-code -- lib/app lib/core lib/features lib/main.dart test
-
-      - name: Inspect analyzer configuration
-        run: cat analysis_options.yaml
+      - name: Check Dart formatting
+        run: dart format --output=none --set-exit-if-changed lib test
 
       - name: Analyze
-        run: flutter analyze
+        run: flutter analyze --fatal-infos
 
       - name: Test
         run: flutter test
 
-      - name: Commit formatter changes on main
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        shell: bash
+      - name: Build Android debug APK
+        run: flutter build apk --debug
+
+  build-ios:
+    name: Build iOS without code signing
+    runs-on: macos-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up pinned Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.9
+          channel: stable
+          cache: true
+
+      - name: Confirm Xcode and Flutter
         run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- lib/app lib/core lib/features lib/main.dart test analysis_options.yaml pubspec.lock
-          if git diff --cached --quiet; then
-            echo "No formatter or analyzer configuration changes to commit."
-          else
-            git commit -m "style: apply Dart formatting and analyzer updates"
-            git push
-          fi
+          xcodebuild -version
+          flutter --version
+          dart --version
+
+      - name: Resolve dependencies
+        run: flutter pub get
+
+      - name: Generate localizations
+        run: flutter gen-l10n
+
+      - name: Build iOS without code signing
+        run: flutter build ios --no-codesign
