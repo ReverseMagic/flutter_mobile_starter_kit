@@ -17,12 +17,8 @@ void main() {
       final container = ProviderContainer();
       addTearDown(container.dispose);
 
-      container
-          .read(themeModeProvider.notifier)
-          .setThemeMode(ThemeMode.dark);
-      container
-          .read(localeProvider.notifier)
-          .setLocale(const Locale('ar'));
+      container.read(themeModeProvider.notifier).setThemeMode(ThemeMode.dark);
+      container.read(localeProvider.notifier).setLocale(const Locale('ar'));
 
       expect(container.read(themeModeProvider), ThemeMode.dark);
       expect(container.read(localeProvider), const Locale('ar'));

@@ -16,9 +16,7 @@ void main() {
     );
   });
 
-  testWidgets('renders Arabic and RTL when Arabic is selected', (
-    tester,
-  ) async {
+  testWidgets('renders Arabic and RTL when Arabic is selected', (tester) async {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [

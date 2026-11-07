@@ -3,17 +3,18 @@ import 'package:flutter/material.dart';
 abstract final class AppTheme {
   static final light = ThemeData(
     useMaterial3: true,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.black,
-      brightness: Brightness.light,
-    ).copyWith(
-      primary: Colors.black,
-      onPrimary: Colors.white,
-      secondary: Colors.black,
-      onSecondary: Colors.white,
-      surface: Colors.white,
-      onSurface: Colors.black,
-    ),
+    colorScheme:
+        ColorScheme.fromSeed(
+          seedColor: Colors.black,
+          brightness: Brightness.light,
+        ).copyWith(
+          primary: Colors.black,
+          onPrimary: Colors.white,
+          secondary: Colors.black,
+          onSecondary: Colors.white,
+          surface: Colors.white,
+          onSurface: Colors.black,
+        ),
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
@@ -34,26 +35,25 @@ abstract final class AppTheme {
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
         minimumSize: const Size(48, 48),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       ),
     ),
   );
 
   static final dark = ThemeData(
     useMaterial3: true,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.white,
-      brightness: Brightness.dark,
-    ).copyWith(
-      primary: Colors.white,
-      onPrimary: Colors.black,
-      secondary: Colors.white,
-      onSecondary: Colors.black,
-      surface: const Color(0xFF111111),
-      onSurface: Colors.white,
-    ),
+    colorScheme:
+        ColorScheme.fromSeed(
+          seedColor: Colors.white,
+          brightness: Brightness.dark,
+        ).copyWith(
+          primary: Colors.white,
+          onPrimary: Colors.black,
+          secondary: Colors.white,
+          onSecondary: Colors.black,
+          surface: const Color(0xFF111111),
+          onSurface: Colors.white,
+        ),
     scaffoldBackgroundColor: Colors.black,
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.black,
@@ -74,9 +74,7 @@ abstract final class AppTheme {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         minimumSize: const Size(48, 48),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       ),
     ),
   );

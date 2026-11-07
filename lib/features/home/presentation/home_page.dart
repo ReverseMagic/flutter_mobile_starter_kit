@@ -15,9 +15,7 @@ class HomePage extends ConsumerWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.appTitle),
-      ),
+      appBar: AppBar(title: Text(l10n.appTitle)),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsetsDirectional.fromSTEB(20, 24, 20, 32),
@@ -30,10 +28,7 @@ class HomePage extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 12),
-            Text(
-              l10n.welcomeBody,
-              style: textTheme.bodyLarge,
-            ),
+            Text(l10n.welcomeBody, style: textTheme.bodyLarge),
             const SizedBox(height: 28),
             _SectionHeading(
               title: l10n.appearance,
@@ -47,14 +42,8 @@ class HomePage extends ConsumerWidget {
                   value: ThemeMode.system,
                   label: Text(l10n.system),
                 ),
-                ButtonSegment(
-                  value: ThemeMode.light,
-                  label: Text(l10n.light),
-                ),
-                ButtonSegment(
-                  value: ThemeMode.dark,
-                  label: Text(l10n.dark),
-                ),
+                ButtonSegment(value: ThemeMode.light, label: Text(l10n.light)),
+                ButtonSegment(value: ThemeMode.dark, label: Text(l10n.dark)),
               ],
               selected: {themeMode},
               onSelectionChanged: (selection) {
@@ -72,10 +61,7 @@ class HomePage extends ConsumerWidget {
             SegmentedButton<Locale?>(
               showSelectedIcon: false,
               segments: [
-                ButtonSegment(
-                  value: null,
-                  label: Text(l10n.system),
-                ),
+                ButtonSegment(value: null, label: Text(l10n.system)),
                 ButtonSegment(
                   value: const Locale('en'),
                   label: Text(l10n.english),
@@ -122,10 +108,7 @@ class HomePage extends ConsumerWidget {
 }
 
 class _SectionHeading extends StatelessWidget {
-  const _SectionHeading({
-    required this.title,
-    required this.description,
-  });
+  const _SectionHeading({required this.title, required this.description});
 
   final String title;
   final String description;
