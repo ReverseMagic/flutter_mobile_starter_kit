@@ -1,0 +1,28 @@
+# Flutter / Dart
+.dart_tool/
+.packages
+.pub/
+build/
+coverage/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Generated localization output (regenerate with flutter gen-l10n)
+lib/l10n/generated/
+
+# FVM cache/symlink; keep .fvmrc committed
+.fvm/
+!.fvmrc
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# Platform-local configuration
+android/local.properties
+ios/Flutter/.last_build_id
+
+# Operating systems
+.DS_Store
+Thumbs.db
