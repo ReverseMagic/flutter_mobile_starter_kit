@@ -19,6 +19,32 @@ Requirements remain proposed until the relevant technical decisions are accepted
 | SK-011 | Quality checks | Formatting, static analysis, tests, and available platform builds have recorded results. | PROPOSED |
 | SK-012 | Reusable example | At least one small example feature demonstrates the approved architecture end to end and can be removed without breaking core infrastructure. | PROPOSED |
 | SK-013 | Secure defaults | No secrets are committed; optional backend integrations document client/server trust boundaries and authorization requirements. | PROPOSED |
+| SK-014 | Product discovery and scope control | The starter kit has explicit scope, out-of-scope items, traceable acceptance criteria, and unresolved assumptions recorded before implementation. | PROPOSED |
+| SK-015 | First-party design foundation | Shared UI is built from Flutter SDK primitives integrated with centralized tokens, states, and motion rules; no external UI framework is adopted as the foundation by default. | PROPOSED |
+| SK-016 | Accessibility | Interactive controls have accessible names/roles/states, adequate touch targets, text scaling support, contrast, focus behavior, and reduced-motion support. | PROPOSED |
+| SK-017 | Localization quality | English and Arabic resources have matching keys/placeholders; locale selection, formatting, mixed-direction text, and RTL layout are tested. | PROPOSED |
+| SK-018 | Security review | Trust boundaries, secrets, permissions, data handling, and any future backend authorization are reviewed before release. | PROPOSED |
+| SK-019 | Performance and reliability | Performance budgets and representative scenarios are defined before performance claims; startup, frame timing, memory, and network behavior are measured where applicable. | PROPOSED |
+| SK-020 | Release and operations readiness | Build/release configuration, signing boundaries, CI checks, diagnostics, and recovery expectations are documented; publishing requires explicit authorization. | PROPOSED |
+
+## Engineering skills mapping
+
+The following public skill repository is the engineering reference: [flutter-engineering-skills](https://github.com/ParkersYourDad/flutter-engineering-skills). Its root `SKILL.md` and shared references were inspected on 2026-11-07. These skills are guidance and review criteria, not permission to add every technology or optional subsystem.
+
+| Skill area | Application to this starter kit |
+|---|---|
+| Company orchestration / workflow | Plan dependencies, maintain requirement traceability, record decisions, and report evidence. |
+| Product discovery | Define reusable-starter scope and acceptance criteria; avoid product-specific assumptions. |
+| Mobile design research / Apple product craft | Apply native-feeling Android/iOS interaction and a coherent first-party design system when UI is implemented. |
+| Flutter architecture | Govern folder boundaries, state ownership, navigation, configuration, and dependency direction. |
+| Supabase backend engineering | Conditional only; no Supabase/backend is added without a real starter-kit requirement. |
+| Native platform integration | Conditional; use native Swift/Kotlin integration only when Flutter SDK/plugin capabilities do not satisfy a documented need. |
+| AI product engineering | Out of scope by default; load only for a concrete AI-enabled example or integration. |
+| Accessibility and localization | Apply English/Arabic, RTL/LTR, semantics, scaling, contrast, and screen-reader criteria to shared UI. |
+| Mobile QA engineering | Add regression tests and independent verification passes; do not claim independent agents if not available. |
+| Mobile security engineering | Review mobile trust boundaries, secrets, storage, permissions, and optional backend controls. |
+| Performance and reliability | Define measurable budgets and profile real scenarios; do not optimize speculatively. |
+| Release and operations | Establish build/CI/release hygiene; do not publish or touch signing secrets without authorization. |
 
 ## Verification policy
 
