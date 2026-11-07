@@ -43,6 +43,9 @@ jobs:
       - name: Generate localizations
         run: flutter gen-l10n
 
+      - name: Inspect formatted shell example
+        run: dart format --output=show lib/app/router/shell_router_example.dart
+
       - name: Check Dart formatting
         run: dart format --output=none --set-exit-if-changed lib test
 
