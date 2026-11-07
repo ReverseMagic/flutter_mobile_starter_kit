@@ -59,5 +59,17 @@
   "temporarySettingsNotice": "Theme and language selections are temporary in this example and reset when the app restarts.",
   "@temporarySettingsNotice": {
     "description": "Discloses that preference persistence has not been implemented."
+  },
+  "homeTab": "Home",
+  "@homeTab": {
+    "description": "Home destination label in the optional navigation shell example."
+  },
+  "exampleTab": "Example",
+  "@exampleTab": {
+    "description": "Second destination label in the optional navigation shell example."
+  },
+  "exampleDestinationBody": "This is a second destination in the optional navigation-shell example.",
+  "@exampleDestinationBody": {
+    "description": "Body content for the second destination in the optional navigation shell example."
   }
 }
