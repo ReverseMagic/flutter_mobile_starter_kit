@@ -1,0 +1,70 @@
+name: Bootstrap Flutter project
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/bootstrap-flutter.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: flutter-project-bootstrap
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    name: Generate Android and iOS Flutter scaffold
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up pinned Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.9
+          channel: stable
+          cache: true
+
+      - name: Confirm toolchain
+        run: |
+          flutter --version
+          dart --version
+
+      - name: Generate Flutter mobile project
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp README.md /tmp/starter-kit-README.md
+          flutter create --platforms=android,ios --org com.example --project-name mobile_starter --no-pub .
+          cp /tmp/starter-kit-README.md README.md
+
+      - name: Resolve dependencies
+        run: flutter pub get
+
+      - name: Verify generated scaffold
+        run: |
+          dart format --output=none --set-exit-if-changed .
+          flutter analyze
+          flutter test
+
+      - name: Remove one-time bootstrap workflow
+        run: rm .github/workflows/bootstrap-flutter.yml
+
+      - name: Commit generated scaffold
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+          else
+            git commit -m "build: generate Flutter Android and iOS scaffold"
+            git push
+          fi
