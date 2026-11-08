@@ -8,9 +8,9 @@ Open items must be resolved with evidence or an explicit owner decision. Do not 
 | I-002 | Existing technology-governance file was initially missing from this repository. | Exact package versions and routing decisions must not be guessed. | Recovered and reviewed the user's governing technology definition; reconciled the decisions in `DECISIONS.md`. | RESOLVED |
 | I-003 | Exact Flutter/Dart toolchain must be confirmed locally. | The pinned Flutter version determines the exact bundled Dart patch and runtime compatibility. | GitHub Actions reported Flutter 3.47.9 and Dart 3.13.7; dependency resolution, analysis, tests, and Android debug build passed. Local FVM setup is still user-side. | RESOLVED |
 | I-004 | GoRouter typed-route policy was unresolved. | The skills repository and prior boilerplate decisions differ on route code generation. | Resolved: use manual GoRouter configuration and centralized route constants; do not add `go_router_builder` or build_runner. | RESOLVED |
-| I-005 | iOS build verification is outstanding. | Generated iOS files do not prove the Xcode project compiles. | Added a macOS GitHub Actions job to run `flutter build ios --no-codesign`; inspect its first result. Simulator and device checks remain separate. | OPEN |
+| I-005 | iOS build verification is outstanding. | Generated iOS files do not prove the Xcode project compiles. | macOS GitHub Actions run #25 completed `flutter build ios --no-codesign` successfully. Simulator and device checks remain separate. | RESOLVED |
 | I-006 | Persistent language and theme preference storage is not selected. | The example currently changes preferences only in memory; adding a persistence package would be a stack decision. | Keep the example explicitly temporary until the storage mechanism is approved. | OPEN |
-| I-007 | Optional shell-navigation example is not implemented. | The starter should support apps with and without a persistent navigation shell. | Add and test a separate optional shell-router example without making it the default router. | OPEN |
+| I-007 | Optional shell-navigation example is not implemented. | The starter should support apps with and without a persistent navigation shell. | Added a separate optional `StatefulShellRoute.indexedStack` example and widget test; latest CI passed. | RESOLVED |
 
 ## Evidence log
 
