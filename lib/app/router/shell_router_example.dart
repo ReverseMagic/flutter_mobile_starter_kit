@@ -66,7 +66,7 @@ class _ShellExampleScaffold extends StatelessWidget {
         selectedIndex: navigationShell.currentIndex,
         onDestinationSelected: (index) {
           navigationShell.goBranch(
-            index: index,
+            index,
             initialLocation: index == navigationShell.currentIndex,
           );
         },
