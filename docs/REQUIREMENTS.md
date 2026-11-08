@@ -6,26 +6,26 @@ Requirements remain proposed until the relevant technical decisions are accepted
 
 | ID | Requirement | Acceptance criteria | Status |
 |---|---|---|---|
-| SK-001 | Android and iOS mobile foundation | Flutter project targets Android and iOS phones; no web/desktop targets are introduced as product scope. Native folders are present; Android build is verified; iOS build remains to be checked on macOS. | IMPLEMENTED |
+| SK-001 | Android and iOS mobile foundation | Flutter project targets Android and iOS phones; no web/desktop targets are introduced as product scope. Native folders are present; Android debug and iOS no-code-sign builds pass in CI. | VERIFIED |
 | SK-002 | Governed technology stack | Every direct dependency and important architecture choice is documented with compatibility evidence. | IMPLEMENTED |
 | SK-003 | Maintainable app structure | App, core infrastructure, and feature code have clear responsibilities and acyclic dependencies. Initial app/core/features structure exists; broader dependency-boundary audit remains. | IMPLEMENTED |
-| SK-004 | Navigation | Navigation supports ordinary app routes and an optional shell/navigation example without forcing every app to use bottom navigation. | PROPOSED |
+| SK-004 | Navigation | Navigation supports ordinary app routes and an optional shell/navigation example without forcing every app to use bottom navigation. The optional shell example and branch-switching widget test pass CI. | VERIFIED |
 | SK-005 | State management | State management follows the accepted manual-provider policy; no unapproved code generation. | VERIFIED |
 | SK-006 | Theme foundation | Light and dark themes are centrally defined and can be extended without screen-level duplication. | IMPLEMENTED |
 | SK-007 | Localization and directionality | English and Arabic examples demonstrate generated localization resources and correct LTR/RTL directionality. | VERIFIED |
 | SK-008 | Error and loading behavior | Shared examples demonstrate explicit loading, empty, and recoverable error states without swallowing failures. | PROPOSED |
 | SK-009 | Testability | Core configuration and representative UI/state behavior have automated tests. | VERIFIED |
 | SK-010 | Platform hygiene | Android and iOS configuration, permissions, identifiers, and signing-sensitive settings are documented and reviewed. Native scaffolding exists; a complete platform review remains. | IMPLEMENTED |
-| SK-011 | Quality checks | Formatting, static analysis, tests, and available platform builds have recorded results. Linux CI passed formatting, analysis, tests, and Android debug build; iOS CI has been added but not yet observed. | IMPLEMENTED |
+| SK-011 | Quality checks | Formatting, static analysis, tests, Android debug build, and iOS no-code-sign build pass in the latest GitHub Actions run. Device and release verification remain out of scope for this check. | VERIFIED |
 | SK-012 | Reusable example | At least one small example feature demonstrates the approved architecture end to end and can be removed without breaking core infrastructure. | IMPLEMENTED |
 | SK-013 | Secure defaults | No secrets are committed; optional backend integrations document client/server trust boundaries and authorization requirements. | PROPOSED |
 | SK-014 | Product discovery and scope control | The starter kit has explicit scope, out-of-scope items, traceable acceptance criteria, and unresolved assumptions recorded before implementation. | IMPLEMENTED |
-| SK-015 | First-party design foundation | Shared UI is built from Flutter SDK primitives integrated with centralized tokens, states, and motion rules; no external UI framework is adopted as the foundation by default. | IMPLEMENTED |
+| SK-015 | First-party design foundation | Shared UI is built from Flutter SDK primitives integrated with centralized tokens, states, and motion rules; no external UI framework is adopted as the foundation by default. A complete token, component-state, and motion system is not implemented yet. | PROPOSED |
 | SK-016 | Accessibility | Interactive controls have accessible names/roles/states, adequate touch targets, text scaling support, contrast, focus behavior, and reduced-motion support. | PROPOSED |
-| SK-017 | Localization quality | English and Arabic resources have matching keys/placeholders; locale selection, formatting, mixed-direction text, and RTL layout are tested. | IMPLEMENTED |
+| SK-017 | Localization quality | English and Arabic resources have matching keys/placeholders; locale selection, formatting, mixed-direction text, and RTL layout are tested. Basic English/Arabic localization and directionality are covered; the broader acceptance criteria remain incomplete. | PROPOSED |
 | SK-018 | Security review | Trust boundaries, secrets, permissions, data handling, and any future backend authorization are reviewed before release. | PROPOSED |
 | SK-019 | Performance and reliability | Performance budgets and representative scenarios are defined before performance claims; startup, frame timing, memory, and network behavior are measured where applicable. | PROPOSED |
-| SK-020 | Release and operations readiness | Build/release configuration, signing boundaries, CI checks, diagnostics, and recovery expectations are documented; publishing requires explicit authorization. | IMPLEMENTED |
+| SK-020 | Release and operations readiness | Build/release configuration, signing boundaries, CI checks, diagnostics, and recovery expectations are documented; publishing requires explicit authorization. CI exists, but signing boundaries, diagnostics, and recovery expectations need a dedicated review. | PROPOSED |
 
 ## Engineering skills mapping
 
@@ -55,8 +55,6 @@ For each requirement, record the exact evidence and command/tool result. Mark a 
 - Flutter 3.47.9 / Dart 3.13.7 reported by GitHub Actions.
 - Dependency resolution completed on the pinned Flutter SDK.
 - Flutter localization generation completed.
-- `flutter analyze` completed with no issues in the successful initial CI run.
-- Four Flutter tests passed in the successful initial CI run.
-- `flutter build apk --debug` completed successfully in the native-generation workflow.
-- iOS native project files were generated and committed. An iOS build has not yet been observed; a macOS CI job is now configured to run `flutter build ios --no-codesign`.
+- Latest successful GitHub Actions run [#25](https://github.com/ReverseMagic/flutter_mobile_starter_kit/actions/runs/42487278201) completed both jobs: Dart format check, `flutter analyze --fatal-infos`, `flutter test`, Android debug APK build, and iOS `flutter build ios --no-codesign`.
+- The optional shell navigation widget test is included in the successful test run.
 - No physical-device, simulator-interaction, release-signing, or store-submission verification is claimed.
